@@ -2,14 +2,14 @@ resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr_block
 }
 
-resource "aws_subnet" "public" {
+resource "aws_subnet" "public-1" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = var.public_subnet_cidr_block
+  cidr_block = var.public-1_subnet_cidr_block
 }
 
-resource "aws_subnet" "private" {
+resource "aws_subnet" "private-1" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = var.private_subnet_cidr_block
+  cidr_block = var.private-1_subnet_cidr_block
 }
 
 resource "aws_internet_gateway" "main" {
@@ -22,10 +22,10 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public.id
+  subnet_id     = aws_subnet.public-1.id
 }
 
-resource "aws_route_table" "public" {
+resource "aws_route_table" "public-1" {
   vpc_id = aws_vpc.main.id
 
   route {
@@ -34,7 +34,7 @@ resource "aws_route_table" "public" {
   }
 }
 
-resource "aws_route_table" "private" {
+resource "aws_route_table" "private-1" {
   vpc_id = aws_vpc.main.id
 
   route {
@@ -43,12 +43,12 @@ resource "aws_route_table" "private" {
   }
 }
 
-resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.public.id
-  route_table_id = aws_route_table.public.id
+resource "aws_route_table_association" "public-1" {
+  subnet_id      = aws_subnet.public-1.id
+  route_table_id = aws_route_table.public-1.id
 }
 
-resource "aws_route_table_association" "private" {
-  subnet_id      = aws_subnet.private.id
-  route_table_id = aws_route_table.private.id
+resource "aws_route_table_association" "private-1" {
+  subnet_id      = aws_subnet.private-1.id
+  route_table_id = aws_route_table.private-1.id
 }

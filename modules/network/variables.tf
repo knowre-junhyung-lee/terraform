@@ -2,10 +2,10 @@ variable "vpc_cidr_block" {
   type = string
 }
 
-variable "public_subnet_cidr_block" {
+variable "public-1_subnet_cidr_block" {
   type = string
 }
 
-variable "private_subnet_cidr_block" {
+variable "private-1_subnet_cidr_block" {
   type = string
 }

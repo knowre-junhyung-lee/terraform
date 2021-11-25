@@ -12,8 +12,8 @@ provider "aws" {
 }
 
 module "vpc" {
-  source                    = "./modules/network"
+  source                    = "../../modules/network"
   vpc_cidr_block            = "10.10.0.0/16"
-  public_subnet_cidr_block  = "10.10.0.0/24"
-  private_subnet_cidr_block = "10.10.1.0/24"
+  public-1_subnet_cidr_block  = "10.10.0.0/24"
+  private-1_subnet_cidr_block = "10.10.1.0/24"
 }
