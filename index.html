@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script type="application/javascript">
+
+    function requestURL(url) {
+        let target = document.getElementById('frame');
+        fetch(url)
+            .then(res => res.json())
+            .then(json => target.innerHTML = json.message || JSON.parse(json.body).message)
+            .catch(error => console.log("error:", error));
+    }
+
+</script>
+
+<body>
+    <input type="button" name="ecs-api" value='ecs-api' onclick="requestURL('https://ecs.junhyung.knowre.com')"></input>
+    <input type="button" name="lambda-api" value='lambda-api'
+        onclick="requestURL('https://lambda.junhyung.knowre.com/lambda-svc')"></input>
+    <div id="frame">
+
+    </div>
+</body>
+
+</html>

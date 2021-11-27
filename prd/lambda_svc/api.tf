@@ -25,12 +25,24 @@ resource "aws_api_gateway_method" "method" {
   authorization = "NONE"
 }
 
+resource "aws_api_gateway_method_response" "method_response" {
+  rest_api_id   = aws_api_gateway_rest_api.lambda-svc.id
+  resource_id   = aws_api_gateway_resource.lambda-svc.id
+  http_method = aws_api_gateway_method.method.http_method
+
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
+
 resource "aws_api_gateway_integration" "integration" {
   rest_api_id             = aws_api_gateway_rest_api.lambda-svc.id
   resource_id             = aws_api_gateway_resource.lambda-svc.id
   http_method             = aws_api_gateway_method.method.http_method
   integration_http_method = "POST"
-  type                    = "AWS_PROXY"
+  type                    = "AWS"
   uri                     = aws_lambda_function.lambda-svc.invoke_arn
 }
 
