@@ -1,0 +1,31 @@
+[
+    {
+      "name": "http-server",
+      "image": "jhlee5391/http-server:0.0.3",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "cpu": 256,
+      "environment": [
+        {
+          "name": "PORT",
+          "value": "3000"
+        }
+      ],
+      "ulimits": [
+        {
+          "name": "nofile",
+          "softLimit": 65536,
+          "hardLimit": 65536
+        }
+      ],
+      "mountPoints": [],
+      "memory": 512,
+      "volumesFrom": []
+    }
+  ]
